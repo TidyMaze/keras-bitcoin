@@ -1,5 +1,5 @@
 from fetch_prices import load
-from processing import movingAverage, pairHistoryMovingAverage
+from processing import movingAverage, pairHistoryMovingAverage, pairHistoryMovingAverageRange
 from visualize import plotMultiPairHistory, plotPairHistory
 
 pairHistory = load()
@@ -7,6 +7,6 @@ pairHistory = load()
 # print(data)
 
 
-lines = [pairHistoryMovingAverage(pairHistory, points)
-         for points in range(2, 11, 3)]
+lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
+
 plotMultiPairHistory([pairHistory] + lines)

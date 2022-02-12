@@ -33,3 +33,7 @@ def pairHistoryMovingAverage(pairHistory: PairHistory, points: int) -> PairHisto
     ]
 
     return PairHistory(f'ma({points}) of {pairHistory.pair}', averageHistory)
+
+
+def pairHistoryMovingAverageRange(pairHistory: PairHistory, start: int, end: int, step: int) -> PairHistory:
+    return [pairHistoryMovingAverage(pairHistory, points) for points in range(start, end, step)]
