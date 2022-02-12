@@ -1,8 +1,13 @@
 from fetch_prices import load
+from processing import movingAverage, pairHistoryMovingAverage
 from visualize import plotPairHistory
 
-data = load()
+pairHistory = load()
 
 # print(data)
 
-plotPairHistory(data)
+plotPairHistory(pairHistory)
+
+btcUsdMovingAverage = pairHistoryMovingAverage(pairHistory, 10)
+
+plotPairHistory(btcUsdMovingAverage)

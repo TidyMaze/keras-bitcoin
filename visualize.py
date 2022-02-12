@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 
+from pair_history import PairHistory
 
-def plotPairHistory(pairHistory):
-    xAxis = list(map(lambda item: item.timestamp, pairHistory.history))
-    yAxis = list(map(lambda item: item.price, pairHistory.history))
+
+def plotPairHistory(pairHistory: PairHistory):
+    xAxis = [item.timestamp for item in pairHistory.history]
+    yAxis = [item.price for item in pairHistory.history]
 
     plt.plot(xAxis, yAxis)
     plt.title(f'price evolution of {pairHistory.pair}')
