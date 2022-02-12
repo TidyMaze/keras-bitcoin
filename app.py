@@ -6,11 +6,11 @@ data = load()
 
 print(data)
 
-xAxis = list(map(lambda item: item.timestamp, data))
-yAxis = list(map(lambda item: item.price, data))
+xAxis = list(map(lambda item: item.timestamp, data.history))
+yAxis = list(map(lambda item: item.price, data.history))
 
 plt.plot(xAxis, yAxis)
-plt.title('price evolution')
+plt.title(f'price evolution of {data.pair}')
 plt.xlabel('date')
 plt.ylabel('price')
 plt.show()
