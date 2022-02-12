@@ -8,5 +8,5 @@ from dateutil.parser import parse
 
 def load():
     data = load_csv('bitcoin_history_2021.csv')
-    print(data)
+    # print(data)
     return PairHistory('btc/usdt', list(map(lambda item: PriceItem(float(item['Dernier'].replace(".", "").replace(",", ".")), datetime.strptime(item['Date'], '%d/%m/%Y')), data)))
