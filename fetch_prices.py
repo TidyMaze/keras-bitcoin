@@ -8,6 +8,7 @@ from dateutil.parser import parse
 
 def load():
     data = load_csv('bitcoin_history_2021.csv')
+    data.reverse()
     # print(data)
     history = [PriceItem(datetime.strptime(item['Date'], '%d/%m/%Y'), float(
         item['Dernier'].replace(".", "").replace(",", "."))) for item in data]

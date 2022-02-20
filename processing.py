@@ -47,7 +47,7 @@ def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem
     print(indices)
     print(len(data))
 
-    indicesFromEnd = [len(data) - i for i in indices]
+    indicesFromEnd = [len(data) - 1 - i for i in indices]
     print(indicesFromEnd)
 
     dataAtIndices = [data[i] for i in indicesFromEnd]
