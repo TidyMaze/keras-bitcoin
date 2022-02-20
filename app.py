@@ -15,5 +15,5 @@ seqWithOnlyPrices = [
     for rows in seq
 ]
 
-for el in seqWithOnlyPrices:
-    print(el)
+for i in range(len(seqWithOnlyPrices)):
+    print(f'{i}: {seqWithOnlyPrices[i]}')
