@@ -10,5 +10,10 @@ lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
 
 seq = computeWithFiboHistory(pairHistory.history, 6)
 
-for el in seq:
+seqWithOnlyPrices = [
+    [col.price for col in rows]
+    for rows in seq
+]
+
+for el in seqWithOnlyPrices:
     print(el)
