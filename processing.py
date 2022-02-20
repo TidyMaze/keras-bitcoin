@@ -47,12 +47,12 @@ def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem
     print(indices)
     print(len(data))
 
-    indicesFromEnd = [len(data) - 1 - i for i in indices]
-    print(indicesFromEnd)
+    referenceWithPreviouses = [
+        [data[i] for i in [reference - i for i in indices]]
+        for reference in range(len(data))
+        ]
 
-    dataAtIndices = [data[i] for i in indicesFromEnd]
-
-    return dataAtIndices
+    return referenceWithPreviouses
 
 
 def fibonacci(n):

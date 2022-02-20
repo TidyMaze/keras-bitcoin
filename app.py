@@ -8,6 +8,7 @@ plotMultiPairHistory([pairHistory])
 
 lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
 
-seq = computeWithFiboHistory(pairHistory.history, 10)
+seq = computeWithFiboHistory(pairHistory.history, 6)
 
-print(seq)
+for el in seq:
+    print(el)
