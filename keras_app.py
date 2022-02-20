@@ -10,7 +10,7 @@ import numpy as np
 X = np.random.randint(0, 100, (100, 2))
 
 # build a new y np array with each element being the product of each item squared plus 10
-y = np.array([(x[0] * x[1] * x[0] * x[1]) + 10 for x in X])
+y = np.array([(x[0] + x[1]) for x in X])
 
 # print(X)
 print(y)
