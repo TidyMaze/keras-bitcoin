@@ -41,6 +41,10 @@ def pairHistoryMovingAverageRange(pairHistory: PairHistory, start: int, end: int
 # given a list of price item, compute each point with t-1, t-2, t-3, t-5, t-8, t-13
 
 
+def getOffsetList(data, indices, reference):
+    return [data[i] for i in [reference - i for i in indices]]
+
+
 def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem]:
     indices = fibanacciSequence(points)[2:]
 
@@ -48,9 +52,9 @@ def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem
     print(len(data))
 
     referenceWithPreviouses = [
-        [data[i] for i in [reference - i for i in indices]]
-        for reference in range(len(data))
-        ]
+        getOffsetList(data, indices, reference)
+        for reference in range(max(indices), len(data))
+    ]
 
     return referenceWithPreviouses
 

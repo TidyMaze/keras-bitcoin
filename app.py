@@ -4,7 +4,7 @@ from visualize import plotMultiPairHistory, plotPairHistory
 
 pairHistory = load()
 
-plotMultiPairHistory([pairHistory])
+# plotMultiPairHistory([pairHistory])
 
 lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
 
