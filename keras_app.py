@@ -38,4 +38,4 @@ predicted = model.predict(X)
 for l, i in X:
     print(X[i], predicted[i], y[i])
 
-print(model.predict([123, 456]))
+print(model.predict(np.array([[123, 456]])))
