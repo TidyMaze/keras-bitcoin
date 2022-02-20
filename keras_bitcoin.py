@@ -32,10 +32,14 @@ model.add(Activation('LeakyReLU'))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
-sgd = SGD(learning_rate=0.01)
+sgd = SGD(learning_rate=0.0001)
 model.compile(loss='mean_squared_error', optimizer=sgd)
 
+print(np.any(np.isnan(X)))
+print(np.any(np.isnan(y)))
+
 model.fit(X, y, batch_size=10, epochs=1000)
+
 
 predicted = model.predict(X)
 
