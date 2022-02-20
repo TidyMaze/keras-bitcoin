@@ -1,6 +1,7 @@
 from fetch_prices import load
 from processing import computeWithFiboHistory, fibanacciSequence, movingAverage, pairHistoryMovingAverage, pairHistoryMovingAverageRange
 from visualize import plotMultiPairHistory, plotPairHistory
+import numpy as np
 
 pairHistory = load()
 
@@ -17,3 +18,6 @@ seqWithOnlyPrices = [
 
 for i in range(len(seqWithOnlyPrices)):
     print(f'{i}: {seqWithOnlyPrices[i]}')
+
+trainData = np.array(seqWithOnlyPrices)
+print(trainData)
