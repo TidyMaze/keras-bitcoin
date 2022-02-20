@@ -1,12 +1,13 @@
 from fetch_prices import load
-from processing import movingAverage, pairHistoryMovingAverage, pairHistoryMovingAverageRange
+from processing import computeWithFiboHistory, fibanacciSequence, movingAverage, pairHistoryMovingAverage, pairHistoryMovingAverageRange
 from visualize import plotMultiPairHistory, plotPairHistory
 
 pairHistory = load()
 
-# print(data)
-
+plotMultiPairHistory([pairHistory])
 
 lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
 
-plotMultiPairHistory([pairHistory] + lines)
+seq = computeWithFiboHistory(pairHistory.history, 10)
+
+print(seq)

@@ -37,3 +37,32 @@ def pairHistoryMovingAverage(pairHistory: PairHistory, points: int) -> PairHisto
 
 def pairHistoryMovingAverageRange(pairHistory: PairHistory, start: int, end: int, step: int) -> PairHistory:
     return [pairHistoryMovingAverage(pairHistory, points) for points in range(start, end, step)]
+
+# given a list of price item, compute each point with t-1, t-2, t-3, t-5, t-8, t-13
+
+
+def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem]:
+    indices = fibanacciSequence(points)[2:]
+
+    print(indices)
+    print(len(data))
+
+    indicesFromEnd = [len(data) - i for i in indices]
+    print(indicesFromEnd)
+
+    dataAtIndices = [data[i] for i in indicesFromEnd]
+
+    return dataAtIndices
+
+
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+def fibanacciSequence(n):
+    return [fibonacci(i) for i in range(n)]
