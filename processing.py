@@ -42,7 +42,9 @@ def pairHistoryMovingAverageRange(pairHistory: PairHistory, start: int, end: int
 
 
 def getOffsetList(data, indices, reference):
-    return [data[i] for i in [reference - i for i in indices]]
+    res = [data[i] for i in [reference - i for i in indices]]
+    res.reverse()
+    return res
 
 
 def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem]:
