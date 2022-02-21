@@ -34,7 +34,7 @@ assert len(rows) == len(dates)
 yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
 yPairHistory = PairHistory('real', yListItems)
 
-normalization_layer = Normalization(axis=None)
+normalization_layer = Normalization(axis=-1)
 normalization_layer.adapt(X)
 
 print(normalization_layer(X))
