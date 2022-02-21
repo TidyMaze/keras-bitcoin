@@ -31,8 +31,6 @@ print(rows)
 yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
 yPairHistory = PairHistory('real', yListItems)
 
-plotMultiPairHistory([yPairHistory])
-
 normalization_layer = Normalization(axis=None)
 normalization_layer.adapt(X)
 
@@ -63,9 +61,18 @@ model.fit(X, y, batch_size=32, epochs=10000,
           validation_split=0.2, callbacks=[es])
 
 
-predicted = model.predict(X)
+predicted = model.predict(X).tolist()
 
 for i in range(len(X)):
     print(X[i], predicted[i], y[i])
 
 # print(model.predict(np.array([[123, 456]])))
+
+predictedListItems = [PriceItem(dates[i], predicted[i])
+                      for i in range(len(predicted))]
+
+print(predictedListItems)
+
+predictedPairHistory = PairHistory('predicted', predictedListItems)
+
+plotMultiPairHistory([yPairHistory, predictedPairHistory])
