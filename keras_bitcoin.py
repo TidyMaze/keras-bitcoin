@@ -49,6 +49,8 @@ model.add(Dense(2))
 model.add(Activation(activationFn))
 model.add(Dense(2))
 model.add(Activation(activationFn))
+model.add(Dense(2))
+model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
