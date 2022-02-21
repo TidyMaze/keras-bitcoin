@@ -1,4 +1,5 @@
 from datetime import datetime
+from multiprocessing.context import assert_spawning
 from typing import Tuple
 import numpy as np
 from fetch_prices import load
@@ -15,5 +16,8 @@ def loadTrainingData() -> Tuple[np.ndarray, list[datetime]]:
     # print(f'{i}: {seqWithOnlyPrices[i]}')
 
     trainData = np.array(seqWithOnlyPrices)
-    dates = [col.timestamp for col in pairHistory.history]
+    dates = [col.timestamp for col in pairHistory.history][-len(trainData):]
+
+    assert len(trainData) == len(dates)
+
     return trainData, dates

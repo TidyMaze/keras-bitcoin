@@ -28,6 +28,8 @@ rows = y.tolist()
 
 print(rows)
 
+assert len(rows) == len(dates)
+
 yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
 yPairHistory = PairHistory('real', yListItems)
 
