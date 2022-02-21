@@ -33,8 +33,6 @@ model.add(Dense(16))
 model.add(Activation(activationFn))
 model.add(Dense(16))
 model.add(Activation(activationFn))
-model.add(Dense(16))
-model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
@@ -44,7 +42,7 @@ model.compile(loss='mean_squared_error', optimizer=sgd)
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-model.fit(X, y, batch_size=32, epochs=5000)
+model.fit(X, y, batch_size=32, epochs=10000, validation_split=0.2)
 
 
 predicted = model.predict(X)
