@@ -82,7 +82,7 @@ print(len(predictedListItems))
 
 predictedPairHistory = PairHistory('predicted', predictedListItems)
 
-print(predictedPairHistory.history)
-# print(len(predictedPairHistory.history))
+# print(predictedPairHistory.history)
+print(len(predictedPairHistory.history))
 
 plotMultiPairHistory([yPairHistory, predictedPairHistory])
