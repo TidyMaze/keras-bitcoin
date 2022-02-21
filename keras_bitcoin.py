@@ -66,7 +66,7 @@ model.fit(X, y, batch_size=32, epochs=10000,
 predicted = model.predict(X).tolist()
 
 for i in range(len(X)):
-    print(X[i], predicted[i], y[i])
+    print(f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
 
 print(len(predicted))
 
