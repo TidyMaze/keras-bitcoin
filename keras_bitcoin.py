@@ -28,13 +28,8 @@ rows = y.tolist()
 
 print(rows)
 
-yPairHistory = PairHistory(
-    'real',
-    [PriceItem(
-        dates[i],
-        rows[i]
-    ) for i in range(len(rows))]
-)
+yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
+yPairHistory = PairHistory('real', yListItems)
 
 plotMultiPairHistory([yPairHistory])
 
