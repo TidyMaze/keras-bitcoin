@@ -47,10 +47,10 @@ def getOffsetList(data, indices, reference):
     return res + [data[reference]]
 
 
-def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[PriceItem]:
+def computeWithFiboHistory(data: list[PriceItem], points: int) -> list[list[PriceItem]]:
     indices = fibanacciSequence(points)[2:]
 
-    # print(indices)
+    print(indices)
     # print(len(data))
 
     referenceWithPreviouses = [

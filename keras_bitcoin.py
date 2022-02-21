@@ -11,7 +11,7 @@ from training_data_loader import loadTrainingData
 
 trainData = loadTrainingData()
 
-# all but last column in numpy array
+# all but first and last column in numpy array
 X = trainData[:, :-1]
 # last column in numpy array
 y = trainData[:, -1]
@@ -43,7 +43,7 @@ print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
 es = tf.keras.callbacks.EarlyStopping(
-    monitor='val_loss', min_delta=1000, patience=100, verbose=0, mode='auto')
+    monitor='val_loss', min_delta=1000, patience=200, verbose=0, mode='auto')
 
 model.fit(X, y, batch_size=32, epochs=10000,
           validation_split=0.2, callbacks=[es])
