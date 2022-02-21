@@ -2,7 +2,7 @@ from matplotlib.pyplot import axis
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
-from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD, Adam
 from keras.layers import Normalization
 from keras.layers import LeakyReLU
 from pair_history import PairHistory
@@ -53,7 +53,8 @@ model.add(Dense(1))
 model.add(Activation('linear'))
 
 sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer='adam')
+adam = Adam(learning_rate=0.01, clipnorm=1.0)
+model.compile(loss='mean_squared_error', optimizer=adam)
 
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
