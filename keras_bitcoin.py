@@ -66,6 +66,8 @@ predicted = model.predict(X).tolist()
 for i in range(len(X)):
     print(X[i], predicted[i], y[i])
 
+print(len(predicted))
+
 # print(model.predict(np.array([[123, 456]])))
 
 predictedListItems = [PriceItem(dates[i], predicted[i])
@@ -73,6 +75,10 @@ predictedListItems = [PriceItem(dates[i], predicted[i])
 
 print(predictedListItems)
 
+print(len(predictedListItems))
+
 predictedPairHistory = PairHistory('predicted', predictedListItems)
+
+print(len(predictedPairHistory.history))
 
 plotMultiPairHistory([yPairHistory, predictedPairHistory])
