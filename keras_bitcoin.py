@@ -38,7 +38,7 @@ model.compile(loss='mean_squared_error', optimizer=sgd)
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-model.fit(X, y, batch_size=10, epochs=1000)
+model.fit(X, y, batch_size=10, epochs=10000)
 
 
 predicted = model.predict(X)
