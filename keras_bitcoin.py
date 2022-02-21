@@ -29,12 +29,10 @@ model.add(tf.keras.Input(shape=(4,)))
 model.add(normalization_layer)
 model.add(Dense(16))
 model.add(Activation('relu'))
-model.add(Dense(16))
-model.add(Activation('relu'))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
-sgd = SGD(learning_rate=0.01)
+sgd = SGD(learning_rate=0.01, clipnorm=1.0)
 model.compile(loss='mean_squared_error', optimizer=sgd)
 
 print(np.any(np.isnan(X)))
