@@ -55,7 +55,7 @@ print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
 es = tf.keras.callbacks.EarlyStopping(
-    monitor='val_loss', min_delta=1000, patience=200, verbose=0, mode='auto')
+    monitor='val_loss', min_delta=10000, patience=200, verbose=0, mode='auto')
 
 model.fit(X, y, batch_size=32, epochs=10000,
           validation_split=0.2, callbacks=[es])
