@@ -66,7 +66,8 @@ model.fit(X, y, batch_size=32, epochs=10000,
 predicted = model.predict(X).tolist()
 
 for i in range(len(X)):
-    print(f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
+    print(
+        f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
 
 print(len(predicted))
 
@@ -82,6 +83,6 @@ print(len(predictedListItems))
 predictedPairHistory = PairHistory('predicted', predictedListItems)
 
 print(predictedPairHistory.history)
-print(len(predictedPairHistory.history))
+# print(len(predictedPairHistory.history))
 
 plotMultiPairHistory([yPairHistory, predictedPairHistory])
