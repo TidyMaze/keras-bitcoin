@@ -47,14 +47,12 @@ model.add(tf.keras.Input(shape=(8,)))
 model.add(normalization_layer)
 model.add(Dense(8))
 model.add(Activation(activationFn))
-model.add(Dense(4))
-model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
 sgd = SGD(learning_rate=0.01, clipnorm=1.0)
 adam = Adam(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer=adam)
+model.compile(loss='mean_squared_error', optimizer=sgd)
 
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
@@ -66,9 +64,9 @@ print(history.history.keys())
 
 predicted = model.predict(X).tolist()
 
-for i in range(len(X)):
-    print(
-        f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
+# for i in range(len(X)):
+#     print(
+#         f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
 
 print(len(predicted))
 
