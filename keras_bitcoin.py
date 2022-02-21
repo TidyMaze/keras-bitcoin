@@ -40,13 +40,14 @@ normalization_layer.adapt(X)
 print(normalization_layer(X))
 
 activationFn = tf.keras.layers.LeakyReLU(alpha=0.3)
+# activationFn = 'relu'
 
 model = Sequential()
 model.add(tf.keras.Input(shape=(8,)))
 model.add(normalization_layer)
-model.add(Dense(16))
+model.add(Dense(64))
 model.add(Activation(activationFn))
-model.add(Dense(16))
+model.add(Dense(64))
 model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
