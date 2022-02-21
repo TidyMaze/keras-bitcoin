@@ -1,9 +1,11 @@
+from datetime import datetime
+from typing import Tuple
 import numpy as np
 from fetch_prices import load
 from processing import computeWithFiboHistory
 
 
-def loadTrainingData():
+def loadTrainingData() -> Tuple[np.ndarray, list[datetime]]:
     pairHistory = load()
     # lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
     seq = computeWithFiboHistory(pairHistory.history, 10)
@@ -13,4 +15,5 @@ def loadTrainingData():
     # print(f'{i}: {seqWithOnlyPrices[i]}')
 
     trainData = np.array(seqWithOnlyPrices)
-    return trainData
+    dates = [col.timestamp for col in pairHistory.history]
+    return trainData, dates

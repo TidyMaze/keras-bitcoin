@@ -9,7 +9,9 @@ import numpy as np
 
 from training_data_loader import loadTrainingData
 
-trainData = loadTrainingData()
+trainData, dates = loadTrainingData()
+
+print(dates)
 
 # all but first and last column in numpy array
 X = trainData[:, :-1]
