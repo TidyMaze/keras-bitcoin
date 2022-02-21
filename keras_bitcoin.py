@@ -5,6 +5,9 @@ from keras.layers.core import Dense, Dropout, Activation
 from tensorflow.keras.optimizers import SGD
 from keras.layers import Normalization
 from keras.layers import LeakyReLU
+from pair_history import PairHistory
+from price_item import PriceItem
+from visualize import plotMultiPairHistory
 import numpy as np
 
 from training_data_loader import loadTrainingData
@@ -20,6 +23,20 @@ y = trainData[:, -1]
 
 print(X)
 print(y)
+
+rows = y.tolist()
+
+print(rows)
+
+yPairHistory = PairHistory(
+    'real',
+    [PriceItem(
+        dates[i],
+        rows[i]
+    ) for i in range(len(rows))]
+)
+
+plotMultiPairHistory([yPairHistory])
 
 normalization_layer = Normalization(axis=None)
 normalization_layer.adapt(X)
