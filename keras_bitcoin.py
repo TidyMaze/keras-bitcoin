@@ -52,7 +52,7 @@ model.add(Dense(1))
 model.add(Activation('linear'))
 
 sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['val_loss'])
+model.compile(loss='mean_squared_error', optimizer=sgd)
 
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
@@ -63,6 +63,7 @@ es = tf.keras.callbacks.EarlyStopping(
 history = model.fit(X, y, batch_size=32, epochs=10000,
                     validation_split=0.2, callbacks=[es], verbose=2)
 
+print(history.history.keys())
 
 predicted = model.predict(X).tolist()
 
