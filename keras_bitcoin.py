@@ -45,9 +45,9 @@ activationFn = tf.keras.layers.LeakyReLU(alpha=0.3)
 model = Sequential()
 model.add(tf.keras.Input(shape=(8,)))
 model.add(normalization_layer)
-model.add(Dense(64))
+model.add(Dense(2))
 model.add(Activation(activationFn))
-model.add(Dense(64))
+model.add(Dense(2))
 model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
@@ -59,7 +59,7 @@ model.compile(loss='mean_squared_error', optimizer=sgd)
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-history = model.fit(X, y, epochs=3000, batch_size=32,
+history = model.fit(X, y, epochs=1000, batch_size=32,
                     validation_split=0.1, verbose=2)
 
 print(history.history.keys())
