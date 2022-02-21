@@ -57,7 +57,7 @@ model.compile(loss='mean_squared_error', optimizer=sgd)
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-history = model.fit(X, y, epochs=10000, batch_size=32,
+history = model.fit(X, y, epochs=3000, batch_size=32,
                     validation_split=0.2, verbose=2)
 
 print(history.history.keys())
