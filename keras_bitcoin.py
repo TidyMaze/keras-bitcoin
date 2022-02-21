@@ -31,6 +31,10 @@ model.add(tf.keras.Input(shape=(8,)))
 model.add(normalization_layer)
 model.add(Dense(16))
 model.add(Activation(activationFn))
+model.add(Dense(16))
+model.add(Activation(activationFn))
+model.add(Dense(16))
+model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
@@ -40,7 +44,7 @@ model.compile(loss='mean_squared_error', optimizer=sgd)
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-model.fit(X, y, batch_size=32, epochs=10000)
+model.fit(X, y, batch_size=32, epochs=5000)
 
 
 predicted = model.predict(X)
