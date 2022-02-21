@@ -53,13 +53,13 @@ model.add(Dense(1))
 model.add(Activation('linear'))
 
 sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-adam = Adam(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer=sgd)
+adam = Adam(learning_rate=0.001, clipnorm=1.0)
+model.compile(loss='mean_squared_error', optimizer=adam)
 
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
 
-history = model.fit(X, y, epochs=10000, batch_size=32,
+history = model.fit(X, y, epochs=1000,
                     validation_split=0.1, verbose=2)
 
 print(history.history.keys())
