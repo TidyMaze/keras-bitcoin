@@ -29,6 +29,8 @@ model.add(tf.keras.Input(shape=(4,)))
 model.add(normalization_layer)
 model.add(Dense(16))
 model.add(Activation('relu'))
+model.add(Dense(16))
+model.add(Activation('relu'))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
