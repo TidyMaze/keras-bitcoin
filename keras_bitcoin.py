@@ -70,10 +70,10 @@ print(len(predicted))
 
 # print(model.predict(np.array([[123, 456]])))
 
+print(len(dates))
+
 predictedListItems = [PriceItem(dates[i], predicted[i])
                       for i in range(len(predicted))]
-
-print(predictedListItems)
 
 print(len(predictedListItems))
 
