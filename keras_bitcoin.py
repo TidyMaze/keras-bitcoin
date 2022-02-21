@@ -51,7 +51,7 @@ model.add(Activation(activationFn))
 model.add(Dense(1))
 model.add(Activation('linear'))
 
-sgd = SGD(learning_rate=0.001, clipnorm=1.0)
+sgd = SGD(learning_rate=0.01, clipnorm=1.0)
 model.compile(loss='mean_squared_error', optimizer=sgd)
 
 print(np.any(np.isnan(X)))
