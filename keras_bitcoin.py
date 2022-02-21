@@ -9,6 +9,7 @@ from pair_history import PairHistory
 from price_item import PriceItem
 from visualize import plotMultiPairHistory
 import numpy as np
+import matplotlib.pyplot as plt
 
 from training_data_loader import loadTrainingData
 
@@ -51,7 +52,7 @@ model.add(Dense(1))
 model.add(Activation('linear'))
 
 sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
+model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['val_loss'])
 
 print(np.any(np.isnan(X)))
 print(np.any(np.isnan(y)))
@@ -59,8 +60,8 @@ print(np.any(np.isnan(y)))
 es = tf.keras.callbacks.EarlyStopping(
     monitor='val_loss', min_delta=10000, patience=200, verbose=0, mode='auto')
 
-model.fit(X, y, batch_size=32, epochs=10000,
-          validation_split=0.2, callbacks=[es], verbose=2)
+history = model.fit(X, y, batch_size=32, epochs=10000,
+                    validation_split=0.2, callbacks=[es], verbose=2)
 
 
 predicted = model.predict(X).tolist()
@@ -86,3 +87,11 @@ predictedPairHistory = PairHistory('predicted', predictedListItems)
 print(len(predictedPairHistory.history))
 
 plotMultiPairHistory([yPairHistory, predictedPairHistory])
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'])
+plt.show()
