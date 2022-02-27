@@ -13,85 +13,95 @@ import matplotlib.pyplot as plt
 
 from training_data_loader import loadTrainingData
 
-trainData, dates = loadTrainingData()
 
-print(dates)
+def run():
+    trainData, dates = loadTrainingData()
 
-# all but first and last column in numpy array
-X = trainData[:, :-1]
-# last column in numpy array
-y = trainData[:, -1]
+    print(dates)
 
-print(X)
-print(y)
+    # all but first and last column in numpy array
+    X = trainData[:, :-1]
+    # last column in numpy array
+    y = trainData[:, -1]
 
-rows = y.tolist()
+    print(X)
+    print(y)
 
-print(rows)
+    rows = y.tolist()
 
-assert len(rows) == len(dates)
+    print(rows)
 
-yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
-yPairHistory = PairHistory('real', yListItems)
+    assert len(rows) == len(dates)
 
-normalization_layer = Normalization(axis=-1)
-normalization_layer.adapt(X)
+    yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
+    yPairHistory = PairHistory('real', yListItems)
 
-print(normalization_layer(X))
+    normalization_layer = Normalization(axis=-1)
+    normalization_layer.adapt(X)
 
-activationFn = tf.keras.layers.LeakyReLU(alpha=0.3)
-# activationFn = 'relu'
+    print(normalization_layer(X))
 
-model = Sequential()
-model.add(tf.keras.Input(shape=(8,)))
-model.add(normalization_layer)
-model.add(Dense(32))
-model.add(Activation(activationFn))
-model.add(Dense(32))
-model.add(Activation(activationFn))
-model.add(Dense(1))
-model.add(Activation('linear'))
+    activationFn = tf.keras.layers.LeakyReLU(alpha=0.3)
+    # activationFn = 'relu'
 
-sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-adam = Adam(learning_rate=0.01, clipnorm=1.0)
-model.compile(loss='mean_squared_error', optimizer=adam)
+    model = Sequential()
+    model.add(tf.keras.Input(shape=(8,)))
+    model.add(normalization_layer)
+    model.add(Dense(32))
+    model.add(Activation(activationFn))
+    model.add(Dense(32))
+    model.add(Activation(activationFn))
+    model.add(Dense(1))
+    model.add(Activation('linear'))
 
-print(np.any(np.isnan(X)))
-print(np.any(np.isnan(y)))
+    sgd = SGD(learning_rate=0.01, clipnorm=1.0)
+    adam = Adam(learning_rate=0.01, clipnorm=1.0)
+    model.compile(loss='mean_squared_error', optimizer=adam)
 
-history = model.fit(X, y, epochs=1000,
-                    validation_split=0.1, verbose=2)
+    print(np.any(np.isnan(X)))
+    print(np.any(np.isnan(y)))
 
-print(history.history.keys())
+    history = model.fit(X, y, epochs=1000,
+                        validation_split=0.1, verbose=2)
 
-predicted = model.predict(X).tolist()
+    print(history.history.keys())
 
-# for i in range(len(X)):
-#     print(
-#         f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
+    predicted = model.predict(X).tolist()
 
-print(len(predicted))
+    # for i in range(len(X)):
+    #     print(
+    #         f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
 
-# print(model.predict(np.array([[123, 456]])))
+    print(len(predicted))
 
-print(len(dates))
+    # print(model.predict(np.array([[123, 456]])))
 
-predictedListItems = [PriceItem(dates[i], predicted[i])
-                      for i in range(len(predicted))]
+    print(len(dates))
 
-print(len(predictedListItems))
+    predictedListItems = [PriceItem(dates[i], predicted[i])
+                          for i in range(len(predicted))]
 
-predictedPairHistory = PairHistory('predicted', predictedListItems)
+    print(len(predictedListItems))
 
-# print(predictedPairHistory.history)
-print(len(predictedPairHistory.history))
+    predictedPairHistory = PairHistory('predicted', predictedListItems)
 
-plot_multi_pair_history([yPairHistory, predictedPairHistory])
+    # print(predictedPairHistory.history)
+    print(len(predictedPairHistory.history))
 
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'])
-plt.show()
+    plot_multi_pair_history([yPairHistory, predictedPairHistory])
+
+    show_train_history_loss(history)
+
+
+def show_train_history_loss(history):
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'])
+    plt.show()
+
+
+if __name__ == '__main__':
+    run()
