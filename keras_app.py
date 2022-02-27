@@ -35,7 +35,7 @@ model.fit(X, y, batch_size=10, epochs=1000)
 
 predicted = model.predict(X)
 
-for l, i in X:
+for _, i in X:
     print(X[i], predicted[i], y[i])
 
 print(model.predict(np.array([[123, 456]])))

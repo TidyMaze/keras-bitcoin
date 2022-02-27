@@ -7,7 +7,7 @@ from keras.layers import Normalization
 from keras.layers import LeakyReLU
 from pair_history import PairHistory
 from price_item import PriceItem
-from visualize import plotMultiPairHistory
+from visualize import plot_multi_pair_history
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -86,7 +86,7 @@ predictedPairHistory = PairHistory('predicted', predictedListItems)
 # print(predictedPairHistory.history)
 print(len(predictedPairHistory.history))
 
-plotMultiPairHistory([yPairHistory, predictedPairHistory])
+plot_multi_pair_history([yPairHistory, predictedPairHistory])
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
