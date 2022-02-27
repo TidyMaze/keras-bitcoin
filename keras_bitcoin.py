@@ -1,3 +1,4 @@
+from keras.callbacks import History
 from matplotlib.pyplot import axis
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -61,7 +62,7 @@ def run():
     print(np.any(np.isnan(X)))
     print(np.any(np.isnan(y)))
 
-    history = model.fit(X, y, epochs=1000,
+    history: History = model.fit(X, y, epochs=1000,
                         validation_split=0.1, verbose=2)
 
     print(history.history.keys())
