@@ -1,23 +1,22 @@
 from datetime import datetime
-from multiprocessing.context import assert_spawning
 from typing import Tuple
 import numpy as np
 from fetch_prices import load
 from processing import computeWithFiboHistory
 
 
-def loadTrainingData() -> Tuple[np.ndarray, list[datetime]]:
-    pairHistory = load()
-    # lines = pairHistoryMovingAverageRange(pairHistory, start=2, end=10, step=3)
-    seq = computeWithFiboHistory(pairHistory.history, 10)
-    seqWithOnlyPrices = [[col.price for col in rows] for rows in seq]
+def load_training_data() -> Tuple[np.ndarray, list[datetime]]:
+    pair_history = load()
+    # lines = pairHistoryMovingAverageRange(pair_history, start=2, end=10, step=3)
+    seq = computeWithFiboHistory(pair_history.history, 10)
+    seq_with_only_prices = [[col.price for col in rows] for rows in seq]
 
-    # for i in range(len(seqWithOnlyPrices)):
-    # print(f'{i}: {seqWithOnlyPrices[i]}')
+    # for i in range(len(seq_with_only_prices)):
+    # print(f'{i}: {seq_with_only_prices[i]}')
 
-    trainData = np.array(seqWithOnlyPrices)
-    dates = [col.timestamp for col in pairHistory.history][-len(trainData):]
+    train_data = np.array(seq_with_only_prices)
+    dates = [col.timestamp for col in pair_history.history][-len(train_data):]
 
-    assert len(trainData) == len(dates)
+    assert len(train_data) == len(dates)
 
-    return trainData, dates
+    return train_data, dates

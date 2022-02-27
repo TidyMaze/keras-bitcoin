@@ -1,22 +1,20 @@
 from keras.callbacks import History
-from matplotlib.pyplot import axis
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation
+from keras.layers.core import Dense, Activation
 from tensorflow.keras.optimizers import SGD, Adam
 from keras.layers import Normalization
-from keras.layers import LeakyReLU
 from pair_history import PairHistory
 from price_item import PriceItem
 from visualize import plot_multi_pair_history
 import numpy as np
 import matplotlib.pyplot as plt
 
-from training_data_loader import loadTrainingData
+from training_data_loader import load_training_data
 
 
 def run():
-    train_data, dates = loadTrainingData()
+    train_data, dates = load_training_data()
 
     print(dates)
 
