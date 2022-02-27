@@ -41,7 +41,6 @@ def run():
     print(normalization_layer(x))
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
-    # activation_fn = 'relu'
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,)))
@@ -67,13 +66,7 @@ def run():
 
     predicted = model.predict(x).tolist()
 
-    # for i in range(len(x)):
-    #     print(
-    #         f'at {dates[i]}: input {x[i]} => predicted {predicted[i]} (real {y[i]})')
-
     print(len(predicted))
-
-    # print(model.predict(np.array([[123, 456]])))
 
     print(len(dates))
 
@@ -84,7 +77,6 @@ def run():
 
     predicted_pair_history = PairHistory('predicted', predicted_list_items)
 
-    # print(predicted_pair_history.history)
     print(len(predicted_pair_history.history))
 
     plot_multi_pair_history([y_pair_history, predicted_pair_history])
