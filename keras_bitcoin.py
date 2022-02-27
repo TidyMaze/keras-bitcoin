@@ -16,16 +16,16 @@ from training_data_loader import loadTrainingData
 
 
 def run():
-    trainData, dates = loadTrainingData()
+    train_data, dates = loadTrainingData()
 
     print(dates)
 
     # all but first and last column in numpy array
-    X = trainData[:, :-1]
+    x = train_data[:, :-1]
     # last column in numpy array
-    y = trainData[:, -1]
+    y = train_data[:, -1]
 
-    print(X)
+    print(x)
     print(y)
 
     rows = y.tolist()
@@ -34,24 +34,24 @@ def run():
 
     assert len(rows) == len(dates)
 
-    yListItems = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
-    yPairHistory = PairHistory('real', yListItems)
+    y_list_items = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
+    y_pair_history = PairHistory('real', y_list_items)
 
     normalization_layer = Normalization(axis=-1)
-    normalization_layer.adapt(X)
+    normalization_layer.adapt(x)
 
-    print(normalization_layer(X))
+    print(normalization_layer(x))
 
-    activationFn = tf.keras.layers.LeakyReLU(alpha=0.3)
-    # activationFn = 'relu'
+    activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
+    # activation_fn = 'relu'
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,)))
     model.add(normalization_layer)
     model.add(Dense(32))
-    model.add(Activation(activationFn))
+    model.add(Activation(activation_fn))
     model.add(Dense(32))
-    model.add(Activation(activationFn))
+    model.add(Activation(activation_fn))
     model.add(Dense(1))
     model.add(Activation('linear'))
 
@@ -59,19 +59,19 @@ def run():
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
     model.compile(loss='mean_squared_error', optimizer=adam)
 
-    print(np.any(np.isnan(X)))
+    print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(X, y, epochs=1000,
-                        validation_split=0.1, verbose=2)
+    history: History = model.fit(x, y, epochs=1000,
+                                 validation_split=0.1, verbose=2)
 
     print(history.history.keys())
 
-    predicted = model.predict(X).tolist()
+    predicted = model.predict(x).tolist()
 
-    # for i in range(len(X)):
+    # for i in range(len(x)):
     #     print(
-    #         f'at {dates[i]}: input {X[i]} => predicted {predicted[i]} (real {y[i]})')
+    #         f'at {dates[i]}: input {x[i]} => predicted {predicted[i]} (real {y[i]})')
 
     print(len(predicted))
 
@@ -79,17 +79,17 @@ def run():
 
     print(len(dates))
 
-    predictedListItems = [PriceItem(dates[i], predicted[i])
-                          for i in range(len(predicted))]
+    predicted_list_items = [PriceItem(dates[i], predicted[i])
+                            for i in range(len(predicted))]
 
-    print(len(predictedListItems))
+    print(len(predicted_list_items))
 
-    predictedPairHistory = PairHistory('predicted', predictedListItems)
+    predicted_pair_history = PairHistory('predicted', predicted_list_items)
 
-    # print(predictedPairHistory.history)
-    print(len(predictedPairHistory.history))
+    # print(predicted_pair_history.history)
+    print(len(predicted_pair_history.history))
 
-    plot_multi_pair_history([yPairHistory, predictedPairHistory])
+    plot_multi_pair_history([y_pair_history, predicted_pair_history])
 
     show_train_history_loss(history)
 
