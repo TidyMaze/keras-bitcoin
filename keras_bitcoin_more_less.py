@@ -46,9 +46,9 @@ def run():
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
     dropout = 0.01
-    l2 = 0.0001
-    # reg = regularizers.l2(l2)
-    reg = None
+    l2 = 0.01
+    reg = regularizers.l2(l2)
+    # reg = None
 
     hidden_layer_size = 16
 
@@ -69,7 +69,7 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=1000,
+    history: History = model.fit(x, y, epochs=500,
                                  validation_split=0.2, verbose=2, batch_size=128)
 
     print(history.history.keys())
