@@ -59,7 +59,7 @@ def run():
     model.add(Dropout(0.4))
     model.add(Dense(1, activation='sigmoid'))
 
-    sgd = SGD(learning_rate=0.01, clipnorm=1.0)
+    # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
     model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
@@ -70,21 +70,6 @@ def run():
                                  validation_split=0.1, verbose=2)
 
     print(history.history.keys())
-
-    predicted = model.predict(x).tolist()
-
-    print(len(predicted))
-
-    print(len(dates))
-
-    predicted_list_items = [PriceItem(dates[i], predicted[i])
-                            for i in range(len(predicted))]
-
-    print(len(predicted_list_items))
-
-    predicted_pair_history = PairHistory('predicted', predicted_list_items)
-
-    print(len(predicted_pair_history.history))
 
     # plot_multi_pair_history([y_pair_history, predicted_pair_history])
 
