@@ -20,8 +20,6 @@ from training_data_loader import load_training_data_for_regression, load_trainin
 def run():
     train_data, dates = load_training_data_for_classification()
 
-    print(dates)
-
     x = train_data[:, :-1]
     # last column compared to previous in numpy array
     last_column = train_data[:, -1]
@@ -49,12 +47,14 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.1
+    dropout = 0.5
     l2 = 0.0001
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
+    model.add(Dropout(dropout))
+    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(l2)))
     model.add(Dropout(dropout))
     model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(l2)))
     model.add(Dropout(dropout))
