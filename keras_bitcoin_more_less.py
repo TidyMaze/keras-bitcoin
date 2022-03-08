@@ -1,5 +1,8 @@
+import time
+
 from keras.callbacks import History
 import tensorflow as tf
+from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import Sequential
 from keras.layers.core import Dense, Activation
 from tensorflow.keras.optimizers import SGD, Adam
@@ -10,21 +13,27 @@ from visualize import plot_multi_pair_history
 import numpy as np
 import matplotlib.pyplot as plt
 
-from training_data_loader import load_training_data_for_regression
+from training_data_loader import load_training_data_for_regression, load_training_data_for_classification
 
 
 def run():
-    train_data, dates = load_training_data_for_regression()
+    train_data, dates = load_training_data_for_classification()
 
     print(dates)
 
     # all but first and last column in numpy array
     x = train_data[:, :-1]
-    # last column in numpy array
-    y = train_data[:, -1]
+    # last column compared to previous in numpy array
 
-    print(x)
-    print(y)
+    pre_y = np.greater(train_data[:, -1], train_data[:, -2])
+
+    encoder = LabelEncoder()
+    encoder.fit(pre_y)
+    y = encoder.transform(pre_y)
+
+    print({'x': x, 'y': y})
+
+    time.sleep(5)
 
     rows = y.tolist()
 
@@ -50,11 +59,11 @@ def run():
     model.add(Dense(32))
     model.add(Activation(activation_fn))
     model.add(Dense(1))
-    model.add(Activation('linear'))
+    model.add(Activation('softmax'))
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
-    model.compile(loss='mean_squared_error', optimizer=adam)
+    model.compile(loss='binary_crossentropy', optimizer=adam)
 
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
