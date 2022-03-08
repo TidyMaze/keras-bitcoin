@@ -23,13 +23,15 @@ def run():
 
     x = train_data[:, :-1]
     # last column compared to previous in numpy array
-    pre_y = np.greater(train_data[:, -1], train_data[:, -2])
+    last_column = train_data[:, -1]
+    last_column2 = train_data[:, -2]
+    pre_y = np.greater_equal(last_column, last_column2)
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
     y = encoder.transform(pre_y)
 
-    print({'x': x, 'y': y})
+    print({'train_data': train_data, 'last': last_column, 'last-1': last_column2, 'x': x, 'y': y})
 
     time.sleep(5)
 
@@ -89,6 +91,7 @@ def run():
     plot_multi_pair_history([y_pair_history, predicted_pair_history])
 
     show_train_history_loss(history)
+    show_train_history_accuracy(history)
 
 
 def show_train_history_loss(history):
@@ -100,6 +103,14 @@ def show_train_history_loss(history):
     plt.legend(['train', 'test'])
     plt.show()
 
+def show_train_history_accuracy(history):
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'])
+    plt.show()
 
 if __name__ == '__main__':
     run()
