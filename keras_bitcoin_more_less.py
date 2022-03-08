@@ -58,6 +58,8 @@ def run():
     model.add(Dropout(0.05))
     model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
     model.add(Dropout(0.05))
+    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
+    model.add(Dropout(0.05))
     model.add(Dense(1, activation='sigmoid'))
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
