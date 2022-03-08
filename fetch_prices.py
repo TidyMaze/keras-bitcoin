@@ -7,7 +7,7 @@ from dateutil.parser import parse
 
 
 def load():
-    data = load_csv('bitcoin_history_2021.csv')
+    data = load_csv('BTC-USD-5years.csv')
     data.reverse()
     # print(data)
     history = [PriceItem(datetime.strptime(item['Date'], '%d/%m/%Y'), float(

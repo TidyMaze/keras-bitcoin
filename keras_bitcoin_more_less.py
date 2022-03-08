@@ -69,7 +69,7 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=1000,
+    history: History = model.fit(x, y, epochs=2000,
                                  validation_split=0.1, verbose=2)
 
     print(history.history.keys())
