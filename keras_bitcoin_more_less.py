@@ -33,7 +33,7 @@ def run():
 
     print({'train_data': train_data, 'last': last_column, 'last-1': last_column2, 'x': x, 'y': y})
 
-    time.sleep(5)
+    # time.sleep(5)
 
     rows = y.tolist()
 
@@ -63,7 +63,7 @@ def run():
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
-    model.compile(loss='binary_crossentropy', optimizer=adam)
+    model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
@@ -88,9 +88,9 @@ def run():
 
     print(len(predicted_pair_history.history))
 
-    plot_multi_pair_history([y_pair_history, predicted_pair_history])
+    # plot_multi_pair_history([y_pair_history, predicted_pair_history])
 
-    show_train_history_loss(history)
+    # show_train_history_loss(history)
     show_train_history_accuracy(history)
 
 
