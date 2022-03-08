@@ -42,9 +42,6 @@ def run():
 
     assert len(rows) == len(dates)
 
-    y_list_items = [PriceItem(dates[i], rows[i]) for i in range(len(rows))]
-    y_pair_history = PairHistory('real', y_list_items)
-
     normalization_layer = Normalization(axis=-1)
     normalization_layer.adapt(x)
 
