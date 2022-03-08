@@ -63,7 +63,7 @@ def run():
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-    adam = Adam(learning_rate=0.001, clipnorm=1.0)
+    adam = Adam(learning_rate=0.01, clipnorm=1.0)
     model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     print(np.any(np.isnan(x)))
