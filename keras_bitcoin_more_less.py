@@ -50,16 +50,16 @@ def run():
     # reg = regularizers.l2(l2)
     reg = None
 
-    hidden_layer_size = 8
+    hidden_layer_size = 16
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
