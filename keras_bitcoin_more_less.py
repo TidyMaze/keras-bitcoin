@@ -63,13 +63,13 @@ def run():
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-    adam = Adam(learning_rate=0.1, clipnorm=1.0)
+    adam = Adam(learning_rate=0.001, clipnorm=1.0)
     model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=1000,
+    history: History = model.fit(x, y, epochs=50,
                                  validation_split=0.2, verbose=2, batch_size=128)
 
     print(history.history.keys())
