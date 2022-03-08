@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import Sequential
 from keras.layers.core import Dense, Activation
 from tensorflow.keras.optimizers import SGD, Adam
-from keras.layers import Normalization
+from keras.layers import Normalization, Dropout
 from pair_history import PairHistory
 from price_item import PriceItem
 from visualize import plot_multi_pair_history
@@ -53,11 +53,15 @@ def run():
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
     model = Sequential()
-    model.add(tf.keras.Input(shape=(8,)))
+    model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
-    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.001)))
-    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.001)))
+    model.add(Dropout(0.5))
+    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
+    model.add(Dropout(0.5))
+    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
+    model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
+    model.add(Dropout(0.5))
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
