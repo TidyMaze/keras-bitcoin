@@ -47,16 +47,14 @@ def run():
 
     dropout = 0.5
     l2 = 0.01
+    # reg = regularizers.l2(l2)
+    reg = None
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
-    model.add(Dropout(dropout))
-    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(l2)))
     # model.add(Dropout(dropout))
-    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(l2)))
-    # model.add(Dropout(dropout))
-    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(l2)))
+    model.add(Dense(8, activation=activation_fn, kernel_regularizer=reg))
     # model.add(Dropout(dropout))
     model.add(Dense(1, activation='sigmoid'))
 
@@ -67,7 +65,7 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=2000,
+    history: History = model.fit(x, y, epochs=1000,
                                  validation_split=0.1, verbose=2)
 
     print(history.history.keys())
