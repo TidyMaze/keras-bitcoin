@@ -59,7 +59,7 @@ def run():
     model.add(Dense(32))
     model.add(Activation(activation_fn))
     model.add(Dense(1))
-    model.add(Activation('softmax'))
+    model.add(Activation('sigmoid'))
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
