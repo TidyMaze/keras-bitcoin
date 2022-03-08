@@ -50,7 +50,7 @@ def run():
     # reg = regularizers.l2(l2)
     reg = None
 
-    hidden_layer_size = 100
+    hidden_layer_size = 8
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,), ))
@@ -72,7 +72,7 @@ def run():
     print(np.any(np.isnan(y)))
 
     history: History = model.fit(x, y, epochs=1000,
-                                 validation_split=0.1, verbose=2)
+                                 validation_split=0.2, verbose=2)
 
     print(history.history.keys())
 
