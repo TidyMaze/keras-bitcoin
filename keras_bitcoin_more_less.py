@@ -21,10 +21,8 @@ def run():
 
     print(dates)
 
-    # all but first and last column in numpy array
     x = train_data[:, :-1]
     # last column compared to previous in numpy array
-
     pre_y = np.greater(train_data[:, -1], train_data[:, -2])
 
     encoder = LabelEncoder()
