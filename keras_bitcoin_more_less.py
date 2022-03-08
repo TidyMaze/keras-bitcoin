@@ -56,12 +56,9 @@ def run():
     model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
     model.add(Dropout(0.5))
-    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Dropout(0.5))
-    model.add(Dense(8, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
+    model.add(Dense(16, activation=activation_fn, kernel_regularizer=regularizers.l2(0.0001)))
     model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
-    model.add(Dropout(0.5))
 
     sgd = SGD(learning_rate=0.01, clipnorm=1.0)
     adam = Adam(learning_rate=0.01, clipnorm=1.0)
