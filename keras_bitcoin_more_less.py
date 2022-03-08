@@ -36,8 +36,6 @@ def run():
 
     rows = y.tolist()
 
-    print(rows)
-
     assert len(rows) == len(dates)
 
     normalization_layer = Normalization(axis=-1)
