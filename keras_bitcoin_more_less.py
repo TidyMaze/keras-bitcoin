@@ -60,8 +60,6 @@ def run():
     # model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
     # model.add(Dropout(dropout))
-    model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
-    # model.add(Dropout(dropout))
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
