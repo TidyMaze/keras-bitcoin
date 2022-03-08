@@ -45,7 +45,7 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.5
+    dropout = 0.1
     l2 = 0.0001
     # reg = regularizers.l2(l2)
     reg = None
@@ -55,11 +55,11 @@ def run():
     model = Sequential()
     model.add(tf.keras.Input(shape=(8,), ))
     model.add(normalization_layer)
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
-    # model.add(Dropout(dropout))
+    model.add(Dropout(dropout))
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
