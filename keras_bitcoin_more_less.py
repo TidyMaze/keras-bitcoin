@@ -47,13 +47,13 @@ def run():
 
     dropout = 0.01
     l2 = 0.001
-    reg = regularizers.l2(l2)
-    # reg = None
+    # reg = regularizers.l2(l2)
+    reg = None
 
     hidden_layer_size = 16
 
     model = Sequential()
-    model.add(tf.keras.Input(shape=(8,), ))
+    model.add(tf.keras.Input(shape=(18,), ))
     model.add(normalization_layer)
     # model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))

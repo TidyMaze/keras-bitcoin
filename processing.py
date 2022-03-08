@@ -47,7 +47,8 @@ def get_offset_list(data, indices, reference):
 
 
 def compute_with_fibo_history(data: list[PriceItem], points: int) -> list[list[PriceItem]]:
-    indices = fibonacci_sequence(points)[2:]
+    # indices = fibonacci_sequence(points)[2:]
+    indices = list(range(points - 1))[1:]
 
     print(indices)
     # print(len(data))
