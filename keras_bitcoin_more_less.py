@@ -51,8 +51,8 @@ def run():
 
     dropout = 0.01
     l2 = 0.001
-    # reg = regularizers.l2(l2)
-    reg = None
+    reg = regularizers.l2(l2)
+    # reg = None
 
     hidden_layer_size = 16
 
