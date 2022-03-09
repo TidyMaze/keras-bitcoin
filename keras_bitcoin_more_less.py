@@ -50,7 +50,7 @@ def run():
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
     # dropout = 0.5
-    l2 = 0.001
+    l2 = 0.01
     reg = regularizers.l2(l2)
     # reg = None
 
