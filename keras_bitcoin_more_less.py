@@ -49,12 +49,12 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.05
+    dropout = 0.5
     l2 = 0.001
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 16
+    hidden_layer_size = 64
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(18,), ))
