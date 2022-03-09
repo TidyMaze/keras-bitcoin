@@ -49,12 +49,12 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.5
-    l2 = 0.001
+    dropout = 0.1
+    l2 = 0.01
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 64
+    hidden_layer_size = 16
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(18,), ))
@@ -73,7 +73,7 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=500,
+    history: History = model.fit(x, y, epochs=100,
                                  validation_split=0.2, verbose=2, batch_size=128, shuffle=True)
 
     print(history.history.keys())
