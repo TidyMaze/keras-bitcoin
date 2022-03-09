@@ -50,7 +50,7 @@ def run():
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
     dropout = 0.05
-    l2 = 0.0001
+    l2 = 0.001
     reg = regularizers.l2(l2)
     # reg = None
 
@@ -67,7 +67,7 @@ def run():
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-    adam = Adam(learning_rate=0.01, clipnorm=1.0)
+    adam = Adam(learning_rate=0.001, clipnorm=1.0)
     model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     print(np.any(np.isnan(x)))
