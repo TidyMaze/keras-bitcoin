@@ -8,6 +8,7 @@ from tensorflow.keras.models import Sequential
 from keras.layers.core import Dense, Activation
 from tensorflow.keras.optimizers import SGD, Adam
 from keras.layers import Normalization, Dropout
+from keras.callbacks import EarlyStopping
 from pair_history import PairHistory
 from price_item import PriceItem
 from visualize import plot_multi_pair_history
@@ -29,6 +30,8 @@ def run():
     last_column = train_data[:, -1]
     last_column2 = train_data[:, -2]
     pre_y = np.greater_equal(last_column, last_column2)
+
+    callback = EarlyStopping(monitor='val_accuracy', patience=100)
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
@@ -73,8 +76,16 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    history: History = model.fit(x, y, epochs=100,
-                                 validation_split=0.2, verbose=2, batch_size=128, shuffle=True)
+    history: History = model.fit(
+        x,
+        y,
+        epochs=1000,
+        validation_split=0.2,
+        verbose=2,
+        batch_size=128,
+        shuffle=True,
+        callbacks=[callback]
+    )
 
     print(history.history.keys())
 
@@ -93,6 +104,7 @@ def show_train_history_loss(history):
     plt.legend(['train', 'test'])
     plt.show()
 
+
 def show_train_history_accuracy(history):
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
@@ -101,6 +113,7 @@ def show_train_history_accuracy(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'test'])
     plt.show()
+
 
 if __name__ == '__main__':
     run()
