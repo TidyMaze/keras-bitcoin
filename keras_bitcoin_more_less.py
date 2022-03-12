@@ -31,7 +31,7 @@ def run():
     last_column2 = train_data[:, -2]
     pre_y = np.greater_equal(last_column, last_column2)
 
-    callback = EarlyStopping(monitor='accuracy', patience=10)
+    callback = EarlyStopping(monitor='accuracy', patience=100)
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
