@@ -31,7 +31,7 @@ def run():
     last_column2 = train_data[:, -2]
     pre_y = np.greater_equal(last_column, last_column2)
 
-    callback = EarlyStopping(monitor='val_accuracy', patience=50, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
+    callback = EarlyStopping(monitor='val_accuracy', patience=20, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
@@ -57,7 +57,7 @@ def run():
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 16
+    hidden_layer_size = 8
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(18,), ))
