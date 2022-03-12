@@ -31,7 +31,7 @@ def run():
     last_column2 = train_data[:, -2]
     pre_y = np.greater_equal(last_column, last_column2)
 
-    callback = EarlyStopping(monitor='val_accuracy', patience=10, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
+    callback = EarlyStopping(monitor='val_accuracy', patience=50, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
@@ -82,7 +82,7 @@ def run():
         epochs=1000,
         validation_split=0.2,
         verbose=2,
-        batch_size=128,
+        batch_size=32,
         shuffle=True,
         callbacks=[callback]
     )
