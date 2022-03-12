@@ -5,7 +5,10 @@ from datetime import datetime
 @dataclass
 class PriceItem:
     timestamp: datetime
-    price: float
+    price_first: float
+    price_last: float
+    price_min: float
+    price_max: float
 
     def __repr__(self):
-        return f"{self.price} at {self.timestamp}"
+        return f"{self.timestamp} {self.price_first} {self.price_last} {self.price_min} {self.price_max}"

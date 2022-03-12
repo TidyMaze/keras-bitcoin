@@ -59,7 +59,7 @@ def run():
     hidden_layer_size = 16
 
     model = Sequential()
-    model.add(tf.keras.Input(shape=(18,), ))
+    model.add(tf.keras.Input(shape=(75,), ))
     model.add(normalization_layer)
     model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))

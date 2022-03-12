@@ -10,6 +10,14 @@ def load():
     data = load_csv('BTC-USD-5years.csv')
     data.reverse()
     # print(data)
-    history = [PriceItem(datetime.strptime(item['Date'], '%d/%m/%Y'), float(
-        item['Dernier'].replace(".", "").replace(",", "."))) for item in data]
+    history = [
+        PriceItem(
+            datetime.strptime(item['Date'], '%d/%m/%Y'),
+            float(item['Ouv.'].replace(".", "").replace(",", ".")),
+            float(item['Dernier'].replace(".", "").replace(",", ".")),
+            float(item['Plus Haut'].replace(".", "").replace(",", ".")),
+            float(item['Plus Bas'].replace(".", "").replace(",", "."))
+        )
+        for item in data
+    ]
     return PairHistory('btc/usdt', history)
