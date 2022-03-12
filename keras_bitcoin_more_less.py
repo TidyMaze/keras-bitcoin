@@ -24,11 +24,11 @@ def run():
     # shuffle training data
     np.random.shuffle(train_data)
 
-    x = train_data[:, :-1]
+    x = train_data[:, :-4]
 
     # last column compared to previous in numpy array
-    last_column = train_data[:, -1]
-    last_column2 = train_data[:, -2]
+    last_column = train_data[:, -3]
+    last_column2 = train_data[:, -7]
     pre_y = np.greater_equal(last_column, last_column2)
 
 
@@ -59,7 +59,7 @@ def run():
     hidden_layer_size = 16
 
     model = Sequential()
-    model.add(tf.keras.Input(shape=(75,), ))
+    model.add(tf.keras.Input(shape=(x.shape[1],), ))
     model.add(normalization_layer)
     model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
