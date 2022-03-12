@@ -31,7 +31,7 @@ def run():
     last_column2 = train_data[:, -2]
     pre_y = np.greater_equal(last_column, last_column2)
 
-    callback = EarlyStopping(monitor='accuracy', patience=100)
+    callback = EarlyStopping(monitor='val_accuracy', patience=100, verbose=1, restore_best_weights=True)
 
     encoder = LabelEncoder()
     encoder.fit(pre_y)
@@ -52,8 +52,8 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.5
-    l2 = 0.01
+    dropout = 0.001
+    l2 = 0.0001
     reg = regularizers.l2(l2)
     # reg = None
 
