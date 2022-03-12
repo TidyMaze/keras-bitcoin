@@ -21,7 +21,7 @@ from training_data_loader import load_training_data_for_regression, load_trainin
 def run():
     train_data, dates = load_training_data_for_classification()
 
-    # shiuffle training data
+    # shuffle training data
     np.random.shuffle(train_data)
 
     x = train_data[:, :-1]
