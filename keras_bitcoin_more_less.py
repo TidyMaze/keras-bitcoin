@@ -75,7 +75,7 @@ def run():
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    callback = EarlyStopping(monitor='val_accuracy', patience=20, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
+    callback = EarlyStopping(monitor='val_accuracy', patience=50, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
 
     history: History = model.fit(
         x,
