@@ -51,12 +51,15 @@ def run():
 
     activation_fn = tf.keras.layers.LeakyReLU(alpha=0.3)
 
-    dropout = 0.2
-    l2 = 0.01
+    patience = 50
+    epochs = 1000
+    dropout = 0.02
+    l2 = 0.001
+    learning_rate = 0.0001
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 16
+    hidden_layer_size = 32
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(x.shape[1],), ))
@@ -69,18 +72,18 @@ def run():
     model.add(Dense(1, activation='sigmoid'))
 
     # sgd = SGD(learning_rate=0.01, clipnorm=1.0)
-    adam = Adam(learning_rate=0.0001, clipnorm=1.0)
+    adam = Adam(learning_rate=learning_rate, clipnorm=1.0)
     model.compile(loss='binary_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     print(np.any(np.isnan(x)))
     print(np.any(np.isnan(y)))
 
-    callback = EarlyStopping(monitor='val_accuracy', patience=100, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
+    callback = EarlyStopping(monitor='val_accuracy', patience=patience, verbose=1, restore_best_weights=True, min_delta=0.001, mode='max')
 
     history: History = model.fit(
         x,
         y,
-        epochs=1000,
+        epochs=epochs,
         validation_split=0.2,
         verbose=2,
         batch_size=32,
