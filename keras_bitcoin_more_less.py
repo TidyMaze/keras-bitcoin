@@ -59,7 +59,7 @@ def run():
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 128
+    hidden_layer_size = 8
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(x.shape[1],), ))
