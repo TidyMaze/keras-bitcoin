@@ -59,11 +59,13 @@ def run():
     reg = regularizers.l2(l2)
     # reg = None
 
-    hidden_layer_size = 32
+    hidden_layer_size = 128
 
     model = Sequential()
     model.add(tf.keras.Input(shape=(x.shape[1],), ))
     model.add(normalization_layer)
+    model.add(Dropout(dropout))
+    model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
     model.add(Dropout(dropout))
     model.add(Dense(hidden_layer_size, activation=activation_fn, kernel_regularizer=reg))
     model.add(Dropout(dropout))
