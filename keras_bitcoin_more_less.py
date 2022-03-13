@@ -24,11 +24,11 @@ def run():
     # shuffle training data
     np.random.shuffle(train_data)
 
-    x = train_data[:, :-4]
+    x = train_data[:, :-5]
 
     # last column compared to previous in numpy array
-    last_column = train_data[:, -4]
-    last_column2 = train_data[:, -8]
+    last_column = train_data[:, -5]
+    last_column2 = train_data[:, -9]
     pre_y = np.greater_equal(last_column, last_column2)
 
 
