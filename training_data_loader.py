@@ -22,7 +22,7 @@ def load_training_data_for_classification() -> Tuple[np.ndarray, list[datetime]]
     pair_history = load()
     rows = compute_with_fibo_history(pair_history.history, 20)
     seq_with_only_prices = [
-        list(chain(*[[col.price_first, col.price_last, col.price_min, col.price_max] for col in row]))
+        list(chain(*[[col.price_last, col.price_first, col.price_min, col.price_max] for col in row]))
         for row in rows
     ]
     train_data = np.array(seq_with_only_prices)

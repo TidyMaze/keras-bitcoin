@@ -27,8 +27,8 @@ def run():
     x = train_data[:, :-4]
 
     # last column compared to previous in numpy array
-    last_column = train_data[:, -3]
-    last_column2 = train_data[:, -7]
+    last_column = train_data[:, -4]
+    last_column2 = train_data[:, -8]
     pre_y = np.greater_equal(last_column, last_column2)
 
 
@@ -36,7 +36,11 @@ def run():
     encoder.fit(pre_y)
     y = encoder.transform(pre_y)
 
-    print({'train_data': train_data, 'last': last_column, 'last-1': last_column2, 'x': x, 'y': y})
+    print({'train_data': train_data})
+    print({'last_column': last_column})
+    print({'last_column2': last_column2})
+    print({'x': x})
+    print({'y': y})
 
     # time.sleep(5)
 
